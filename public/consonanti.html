@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi di Scrittura Coreana - Consonanti Coreane Fondamentali</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts for authentic Korean Serif & Sans fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f4f4f5;
+    }
+    
+    /* Korean Serif font for practice boxes */
+    .hangul-font {
+      font-family: 'Nanum Myeongjo', 'Noto Serif KR', 'Batang', 'Gungsuh', serif;
+    }
+
+    /* Print styles optimized for standard A4 portrait sheets */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 15mm 15mm 15mm 15mm;
+      }
+      
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+      }
+      
+      .no-print {
+        display: none !important;
+      }
+      
+      .print-shadow-none {
+        box-shadow: none !important;
+      }
+      
+      .print-border-black {
+        border-color: #18181b !important;
+      }
+
+      .print-page-break {
+        page-break-after: always;
+      }
+      
+      .grid-cell {
+        border: 1.5px solid #18181b !important;
+      }
+      
+      .guide-dashed {
+        border-color: #fecdd3 !important; /* Soft rose crosslines */
+      }
+    }
+    
+    /* Interactive whiteboard canvas styling */
+    #slate-canvas {
+      cursor: crosshair;
+      touch-action: none;
+    }
+  </style>
+  
+  <script>
+    // Inject the worksheet data directly into the client-side JS
+    const worksheetData = {"id":"user-template-consonants-1784551944870","title":"Consonanti Coreane Fondamentali","description":"Esercitati con le prime 14 consonanti di base (Jaum) dell'alfabeto Hangul.","createdAt":"2026-07-20T12:52:24.871Z","showGuides":true,"gridSize":"medium","items":[{"id":"c1","hangul":"ㄱ","romanization":"g / k (gi-yeok)","translation":"G/K come in gatto/cane","traceCount":2,"emptyCount":8},{"id":"c2","hangul":"ㄴ","romanization":"n (ni-eun)","translation":"N come in nave","traceCount":2,"emptyCount":8},{"id":"c3","hangul":"ㄷ","romanization":"d / t (di-geut)","translation":"D/T come in dente/tavolo","traceCount":2,"emptyCount":8},{"id":"c4","hangul":"ㄹ","romanization":"r / l (ri-eul)","translation":"R/L (suono intermedio)","traceCount":2,"emptyCount":8},{"id":"c5","hangul":"ㅁ","romanization":"m (mi-eum)","translation":"M come in madre","traceCount":2,"emptyCount":8},{"id":"c6","hangul":"ㅂ","romanization":"b / p (bi-eup)","translation":"B/P come in barca/palla","traceCount":2,"emptyCount":8},{"id":"c7","hangul":"ㅅ","romanization":"s (si-ot)","translation":"S come in sole","traceCount":2,"emptyCount":8},{"id":"c8","hangul":"ㅇ","romanization":"ng (i-eung)","translation":"Muta all'inizio, \"ng\" a fine sillaba","traceCount":2,"emptyCount":8},{"id":"c9","hangul":"ㅈ","romanization":"j (ji-eut)","translation":"G dolce come in gioco","traceCount":2,"emptyCount":8},{"id":"c10","hangul":"ㅊ","romanization":"ch (chi-eut)","translation":"C aspirata come in ciao","traceCount":2,"emptyCount":8},{"id":"c11","hangul":"ㅋ","romanization":"k (k'i-euk)","translation":"K aspirata come in koala","traceCount":2,"emptyCount":8},{"id":"c12","hangul":"ㅌ","romanization":"t (t'i-eut)","translation":"T aspirata come in tè","traceCount":2,"emptyCount":8},{"id":"c13","hangul":"ㅍ","romanization":"p (p'i-eup)","translation":"P aspirata come in parco","traceCount":2,"emptyCount":8},{"id":"c14","hangul":"ㅎ","romanization":"h (hi-eut)","translation":"H aspirata inglese","traceCount":2,"emptyCount":8}]};
+    let currentGridSize = worksheetData.gridSize || 'medium';
+    let showGuides = worksheetData.showGuides !== false;
+    
+    // Virtual Slate state
+    let canvas, ctx;
+    let isDrawing = false;
+    let penColor = '#18181b';
+    let penWidth = 4;
+    let currentSlateChar = '';
+    let currentSlateItem = null;
+    let hasDrawn = false;
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderWorksheet();
+      initSlate();
+      
+      // Hook up UI buttons
+      document.getElementById('btn-print').addEventListener('click', () => window.print());
+      
+      document.getElementById('chk-guides').addEventListener('change', (e) => {
+        showGuides = e.target.checked;
+        renderWorksheet();
+      });
+      
+      document.getElementById('select-size').addEventListener('change', (e) => {
+        currentGridSize = e.target.value;
+        renderWorksheet();
+      });
+    });
+
+    function renderWorksheet() {
+      const container = document.getElementById('worksheet-items');
+      container.innerHTML = '';
+      
+      const sizeClasses = {
+        small: 'w-10 h-10 text-xl',
+        medium: 'w-14 h-14 text-3xl',
+        large: 'w-20 h-20 text-5xl'
+      };
+      
+      const sizeKey = currentGridSize;
+      const sizeClass = sizeClasses[sizeKey] || sizeClasses.medium;
+
+      worksheetData.items.forEach((item, itemIdx) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'bg-white p-5 rounded-lg border border-zinc-200 shadow-sm print-shadow-none print-border-black print-page-break mb-6';
+        
+        // Item Header
+        const headerHTML = `
+          <div class="flex flex-wrap justify-between items-start border-b border-zinc-100 pb-3 mb-4 print:border-zinc-300">
+            <div>
+              <div class="flex items-baseline gap-2">
+                <span class="text-[10px] font-mono px-2 py-0.5 bg-zinc-100 text-zinc-900 rounded border border-zinc-200 font-semibold print:bg-transparent print:text-black print:p-0 print:font-bold">${itemIdx + 1}</span>
+                <h3 class="text-lg font-bold text-zinc-900 print:text-xl">${item.hangul}</h3>
+              </div>
+              <p class="text-xs text-zinc-500 mt-1">
+                <strong class="text-zinc-700">Pronuncia:</strong> <span class="font-mono">${item.romanization}</span> &bull; 
+                <strong class="text-zinc-700">Traduzione:</strong> ${item.translation}
+              </p>
+            </div>
+            <button onclick="openSlate(${itemIdx})" class="no-print text-xs flex items-center gap-1.5 bg-zinc-100 text-zinc-900 hover:bg-zinc-200 border border-zinc-200 px-3 py-1.5 rounded-md transition-colors font-semibold cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+              Traccia in Digitale
+            </button>
+          </div>
+        `;
+        
+        // Grid Cells Logic
+        const chars = Array.from(item.hangul.trim());
+        let cellsHTML = '';
+        
+        if (chars.length > 0) {
+          cellsHTML += '<div class="flex flex-wrap gap-2">';
+          
+          // Reference cells (Solid Black font)
+          cellsHTML += '<div class="flex gap-1 mr-3 border-r border-zinc-200 pr-3 print:border-zinc-300">';
+          chars.forEach(char => {
+            cellsHTML += createCellHTML(char, false, sizeClass);
+          });
+          cellsHTML += '</div>';
+          
+          // Trace cells (Light gray font)
+          if (item.traceCount > 0) {
+            cellsHTML += '<div class="flex flex-wrap gap-1 mr-2">';
+            for (let t = 0; t < item.traceCount; t++) {
+              chars.forEach(char => {
+                cellsHTML += createCellHTML(char, true, sizeClass);
+              });
+            }
+            cellsHTML += '</div>';
+          }
+          
+          // Empty cells
+          if (item.emptyCount > 0) {
+            cellsHTML += '<div class="flex flex-wrap gap-1">';
+            for (let e = 0; e < item.emptyCount; e++) {
+              chars.forEach(() => {
+                cellsHTML += createCellHTML('', false, sizeClass);
+              });
+            }
+            cellsHTML += '</div>';
+          }
+          
+          cellsHTML += '</div>';
+        }
+        
+        itemEl.innerHTML = headerHTML + cellsHTML;
+        container.appendChild(itemEl);
+      });
+    }
+
+    function createCellHTML(char, isTrace, sizeClass) {
+      const guideLines = showGuides ? `
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute inset-y-0 left-1/2 w-0 border-l border-dashed border-rose-200/80 guide-dashed"></div>
+          <div class="absolute inset-x-0 top-1/2 h-0 border-t border-dashed border-rose-200/80 guide-dashed"></div>
+        </div>
+      ` : '';
+      
+      const charSpan = char ? `
+        <span class="hangul-font leading-none ${isTrace ? 'text-zinc-300/85 font-normal print:text-zinc-300' : 'text-zinc-900 font-medium'}" style="z-index: 1;">
+          ${char}
+        </span>
+      ` : '';
+      
+      return `
+        <div class="relative flex items-center justify-center border-[1.5px] border-zinc-400 bg-white select-none grid-cell ${sizeClass}">
+          ${guideLines}
+          ${charSpan}
+        </div>
+      `;
+    }
+
+    // Interactive Drawing Slate System
+    function initSlate() {
+      canvas = document.getElementById('slate-canvas');
+      ctx = canvas.getContext('2d');
+      
+      // Touch/Mouse event listeners
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseleave', stopDrawing);
+      
+      canvas.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+        e.preventDefault();
+      });
+      
+      canvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+        e.preventDefault();
+      });
+      
+      canvas.addEventListener('touchend', () => {
+        const mouseEvent = new MouseEvent('mouseup', {});
+        canvas.dispatchEvent(mouseEvent);
+      });
+    }
+
+    function openSlate(itemIdx) {
+      currentSlateItem = worksheetData.items[itemIdx];
+      currentSlateChar = Array.from(currentSlateItem.hangul.trim())[0] || '한';
+      
+      document.getElementById('slate-title').innerText = `Esercizio Digitale: "${currentSlateItem.hangul}"`;
+      document.getElementById('slate-proun').innerText = `Pronuncia: ${currentSlateItem.romanization} &bull; Significato: ${currentSlateItem.translation}`;
+      
+      const lettersContainer = document.getElementById('slate-letters-tab');
+      lettersContainer.innerHTML = '';
+      
+      const chars = Array.from(currentSlateItem.hangul.trim());
+      chars.forEach((char, idx) => {
+        const btn = document.createElement('button');
+        btn.innerText = char;
+        btn.className = `w-10 h-10 rounded font-serif text-lg font-bold border transition-all cursor-pointer ${char === currentSlateChar ? 'bg-zinc-900 text-white border-zinc-900 shadow-md' : 'bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-700'}`;
+        btn.addEventListener('click', () => {
+          currentSlateChar = char;
+          // Refresh active button styles
+          Array.from(lettersContainer.children).forEach(b => {
+            b.className = b.innerText === char 
+              ? 'w-10 h-10 rounded font-serif text-lg font-bold border transition-all cursor-pointer bg-zinc-900 text-white border-zinc-900 shadow-md'
+              : 'w-10 h-10 rounded font-serif text-lg font-bold border transition-all cursor-pointer bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-700';
+          });
+          drawCanvasGrid();
+        });
+        lettersContainer.appendChild(btn);
+      });
+      
+      // Open slate modal
+      document.getElementById('slate-modal').classList.remove('hidden');
+      document.getElementById('slate-modal').classList.add('flex');
+      
+      // Resize and draw
+      resizeCanvas();
+      clearSlate();
+    }
+
+    function closeSlate() {
+      document.getElementById('slate-modal').classList.add('hidden');
+      document.getElementById('slate-modal').classList.remove('flex');
+    }
+
+    function resizeCanvas() {
+      const container = document.getElementById('canvas-container');
+      const size = Math.min(container.clientWidth, 400);
+      canvas.width = size;
+      canvas.height = size;
+      drawCanvasGrid();
+    }
+
+    function drawCanvasGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw background guidelines
+      ctx.strokeStyle = '#fecdd3'; // soft rose
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 6]);
+      
+      // Center lines
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, 0);
+      ctx.lineTo(canvas.width / 2, canvas.height);
+      ctx.moveTo(0, canvas.height / 2);
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+      
+      ctx.setLineDash([]); // Reset
+      
+      // Draw outer border
+      ctx.strokeStyle = '#e4e4e7'; // zinc-200
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw tracing background character
+      if (currentSlateChar) {
+        ctx.fillStyle = '#f4f4f5'; // Very light zinc background block
+        ctx.font = `bold ${canvas.width * 0.7}px 'Nanum Myeongjo', 'Noto Serif KR', serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(212, 212, 216, 0.45)'; // Semi-transparent zinc grey
+        ctx.fillText(currentSlateChar, canvas.width / 2, canvas.height / 2 + (canvas.width * 0.04));
+      }
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      hasDrawn = true;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ctx.beginPath();
+      ctx.strokeStyle = penColor;
+      ctx.lineWidth = penWidth;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.moveTo(x, y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    function clearSlate() {
+      drawCanvasGrid();
+      hasDrawn = false;
+    }
+
+    function setPenColor(color, el) {
+      penColor = color;
+      const buttons = document.querySelectorAll('.color-btn');
+      buttons.forEach(btn => btn.classList.remove('ring-4', 'ring-zinc-200', 'scale-110'));
+      el.classList.add('ring-4', 'ring-zinc-200', 'scale-110');
+    }
+
+    function setPenWidth(width, el) {
+      penWidth = width;
+      const buttons = document.querySelectorAll('.width-btn');
+      buttons.forEach(btn => btn.classList.remove('bg-zinc-900', 'text-white'));
+      buttons.forEach(btn => btn.classList.add('bg-zinc-100', 'text-zinc-600'));
+      el.classList.remove('bg-zinc-100', 'text-zinc-600');
+      el.classList.add('bg-zinc-900', 'text-white');
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-zinc-200 font-sans">
+
+  <!-- Header -->
+  <header class="no-print bg-white border-b border-zinc-200 sticky top-0 z-10 py-4 px-6 shadow-sm">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-zinc-900 rounded flex items-center justify-center text-white font-bold text-lg">
+          한
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-zinc-900">Esercizi Scrittura Coreana</h1>
+          <p class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Applicazione Autonoma Esportata</p>
+        </div>
+      </div>
+      
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Spacing controls -->
+        <div class="flex items-center gap-2 bg-zinc-50 border border-zinc-200 px-3 py-1.5 rounded-md text-xs text-zinc-600">
+          <label for="select-size" class="font-bold">Dimensione Griglia:</label>
+          <select id="select-size" class="bg-transparent font-bold focus:outline-none cursor-pointer">
+            <option value="small" >Piccola</option>
+            <option value="medium" selected>Media</option>
+            <option value="large" >Grande</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2 bg-zinc-50 border border-zinc-200 px-3 py-1.5 rounded-md text-xs text-zinc-600">
+          <input type="checkbox" id="chk-guides" class="w-4 h-4 text-zinc-900 border-zinc-300 rounded focus:ring-zinc-900 accent-zinc-900 cursor-pointer" checked>
+          <label for="chk-guides" class="font-bold select-none cursor-pointer">Mostra Linee Guida</label>
+        </div>
+        
+        <button id="btn-print" class="flex items-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-950 text-white px-4 py-1.5 rounded-md text-xs font-bold transition-all shadow cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+          Stampa / PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Worksheet Content -->
+  <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-8">
+    <!-- Cover/Title card -->
+    <div class="bg-white p-6 md:p-8 rounded-lg border border-zinc-200 shadow-sm print-shadow-none print-border-black mb-8">
+      <div class="text-center md:text-left">
+        <span class="no-print inline-block text-[9px] font-bold uppercase tracking-widest text-zinc-900 bg-zinc-100 px-2.5 py-0.5 rounded border border-zinc-200 mb-3">FOGLIO ESERCIZIO</span>
+        <h2 class="text-2xl md:text-3xl font-black text-zinc-900" id="worksheet-title">Consonanti Coreane Fondamentali</h2>
+        <p class="text-zinc-500 mt-2 text-sm leading-relaxed" id="worksheet-desc">Esercitati con le prime 14 consonanti di base (Jaum) dell'alfabeto Hangul.</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-zinc-100 print:border-zinc-300 text-xs">
+        <div>
+          <span class="text-zinc-400 block">Tipo Esercizio:</span>
+          <span class="font-bold text-zinc-800">Scrittura Hangul</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 block">Elementi:</span>
+          <span class="font-bold text-zinc-800">14 Gruppi</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 block">Esportato il:</span>
+          <span class="font-bold text-zinc-800">20/07/2026</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 block">Studente:</span>
+          <span class="font-bold text-zinc-800 border-b border-dotted border-zinc-400 w-24 inline-block print:w-32">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice Rows render dynamically -->
+    <div id="worksheet-items"></div>
+  </main>
+
+  <footer class="no-print bg-zinc-900 text-zinc-400 py-6 px-6 text-center text-xs mt-12 border-t border-zinc-950">
+    <p>Creato con <strong>Hangeul Studio</strong>. Esportato come applicazione offline autonoma.</p>
+    <p class="mt-1 text-zinc-500">&copy; 2026 - Tutti i diritti riservati.</p>
+  </footer>
+
+  <!-- Digital Tracing Modal -->
+  <div id="slate-modal" class="no-print fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-xl border border-zinc-200 max-w-lg w-full flex flex-col overflow-hidden max-h-[90vh]">
+      <!-- Modal Header -->
+      <div class="bg-zinc-50 px-6 py-4 border-b border-zinc-200 flex justify-between items-center">
+        <div>
+          <h3 class="text-sm font-bold text-zinc-900 tracking-wider uppercase" id="slate-title">Esercizio Digitale</h3>
+          <p class="text-xs text-zinc-400 mt-0.5" id="slate-proun">Esercizio di tracciamento</p>
+        </div>
+        <button onclick="closeSlate()" class="text-zinc-400 hover:text-zinc-600 p-1.5 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto flex flex-col items-center gap-6">
+        <!-- Syllable selector (for multi-character items like words/phrases) -->
+        <div class="flex flex-col items-center gap-2 w-full">
+          <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Seleziona la sillaba da tracciare:</span>
+          <div id="slate-letters-tab" class="flex flex-wrap gap-2 justify-center"></div>
+        </div>
+        
+        <!-- Canvas area -->
+        <div id="canvas-container" class="relative bg-white border border-zinc-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center w-full max-w-[340px] aspect-square">
+          <canvas id="slate-canvas" class="bg-white"></canvas>
+        </div>
+        
+        <!-- Toolbar -->
+        <div class="w-full flex flex-col gap-4">
+          <!-- Colors -->
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-zinc-500 font-bold">Colore Pennello:</span>
+            <div class="flex gap-2">
+              <button onclick="setPenColor('#18181b', this)" class="color-btn w-6 h-6 rounded-full bg-zinc-900 ring-4 ring-zinc-200 scale-110" title="Nero Zinc"></button>
+              <button onclick="setPenColor('#2563eb', this)" class="color-btn w-6 h-6 rounded-full bg-blue-600" title="Blu"></button>
+              <button onclick="setPenColor('#dc2626', this)" class="color-btn w-6 h-6 rounded-full bg-red-600" title="Rosso"></button>
+              <button onclick="setPenColor('#16a34a', this)" class="color-btn w-6 h-6 rounded-full bg-green-600" title="Verde"></button>
+            </div>
+          </div>
+          
+          <!-- Stroke Width -->
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-zinc-500 font-bold">Spessore Pennello:</span>
+            <div class="flex gap-1 bg-zinc-100 p-1 rounded-md border border-zinc-200">
+              <button onclick="setPenWidth(2, this)" class="width-btn px-3 py-1.5 text-xs font-semibold rounded bg-zinc-100 text-zinc-600 cursor-pointer">Sottile</button>
+              <button onclick="setPenWidth(4, this)" class="width-btn px-3 py-1.5 text-xs font-semibold rounded bg-zinc-900 text-white cursor-pointer">Medio</button>
+              <button onclick="setPenWidth(8, this)" class="width-btn px-3 py-1.5 text-xs font-semibold rounded bg-zinc-100 text-zinc-600 cursor-pointer">Spesso</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal Footer -->
+      <div class="bg-zinc-50 px-6 py-4 border-t border-zinc-200 flex justify-between gap-3">
+        <button onclick="clearSlate()" class="text-xs font-bold text-rose-600 hover:bg-rose-50 px-4 py-2 rounded-md transition-all cursor-pointer">
+          Cancella Tutto
+        </button>
+        <button onclick="closeSlate()" class="bg-zinc-900 hover:bg-zinc-800 border border-zinc-950 text-white text-xs font-bold px-5 py-2.5 rounded-md transition-all cursor-pointer">
+          Completa
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
