@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="gold-shine" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" />
+      <stop offset="100%" stop-color="#d4af37" />
+    </radialGradient>
+    <clipPath id="circle-clip">
+      <circle cx="256" cy="256" r="210" />
+    </clipPath>
+  </defs>
+
+  <!-- High-contrast dark charcoal background frame for app logo aesthetic -->
+  <rect width="512" height="512" rx="112" fill="#1e1e24" />
+
+  <!-- Outer Traditional Gold Ring -->
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#gold-shine)" stroke-width="12" />
+
+  <!-- Core White Circular Base -->
+  <circle cx="256" cy="256" r="210" fill="#faf7f2" />
+
+  <!-- Taegeuk Symbol (Split Red and Blue Yin-Yang) inside clipping path -->
+  <g clip-path="url(#circle-clip)">
+    <!-- Top Crimson Red Half -->
+    <rect x="0" y="0" width="512" height="256" fill="#cd2e3a" />
+    <!-- Bottom Deep Blue Half -->
+    <rect x="0" y="256" width="512" height="256" fill="#0a51c2" />
+
+    <!-- Red and Blue S-curves forming the classic Taegeuk -->
+    <circle cx="151" cy="256" r="105" fill="#cd2e3a" />
+    <circle cx="361" cy="256" r="105" fill="#0a51c2" />
+  </g>
+
+  <!-- Elegant white central letter "한" with beautiful modern serif display typography -->
+  <text 
+    x="256" 
+    y="312" 
+    font-family="'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" 
+    font-size="180" 
+    font-weight="900" 
+    fill="#ffffff" 
+    text-anchor="middle"
+    style="filter: drop-shadow(0px 4px 12px rgba(0,0,0,0.45));"
+  >한</text>
+</svg>

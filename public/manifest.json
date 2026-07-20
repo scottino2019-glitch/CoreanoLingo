@@ -1,0 +1,26 @@
+{
+  "name": "CoreanoLingo: Impara l'Hangul",
+  "short_name": "CoreanoLingo",
+  "description": "Un'applicazione interattiva e stampabile per imparare l'alfabeto e la lingua coreana con la grafica di Duolingo.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf7f2",
+  "theme_color": "#0a51c2",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["education", "games"],
+  "lang": "it"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Impara il Coreano",
+  "description": "Un'applicazione interattiva e colorata ispirata a Duolingo per imparare la lingua coreana, con percorso di lezioni, schede PDF stampabili ed esercizi pratici.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
