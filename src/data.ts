@@ -107,7 +107,7 @@ export const EXERCISE_ITEMS: ExerciseItem[] = [
     id: 'ex-1',
     title: 'Memory delle Sillabe Hangul',
     description: 'Un gioco interattivo per abbinare le tessere con i caratteri coreani alle rispettive lettere romane.',
-    link: '/esercizi/memory_hangul.html',
+    link: 'https://memory-coreano.vercel.app/',
     difficulty: 'Facile',
     iconName: 'Gamepad2'
   },
@@ -115,7 +115,7 @@ export const EXERCISE_ITEMS: ExerciseItem[] = [
     id: 'ex-2',
     title: 'Cruciverba dei Saluti',
     description: 'Trova le parole coreane per completare il cruciverba e metti alla prova la tua memoria ortografica.',
-    link: '/esercizi/cruciverba.html',
+    link: 'https://cruciverba-coreano.vercel.app/',
     difficulty: 'Medio',
     iconName: 'Grid'
   },
