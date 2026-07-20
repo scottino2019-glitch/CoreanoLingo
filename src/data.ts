@@ -3,23 +3,23 @@ import { LessonNode, PdfItem, ExerciseItem } from './types';
 export const LESSON_NODES: LessonNode[] = [
   {
     id: '1',
-    title: 'Alfabeto Coreano (Hangul)',
-    korean: '한글 배우기',
-    link: '/lezioni/hangul.html',
+    title: 'Hangul-Consonanti',
+    korean: '한글 자음',
+    link: '/lezioni/consonanti.html',
     color: 'bg-[#58cc02]',
     borderColor: 'border-[#46a302]',
     iconName: 'BookOpen',
-    description: 'Impara l\'ordine dei tratti delle consonanti e vocali fondamentali dell\'alfabeto coreano.'
+    description: 'Impara l\'ordine dei tratti delle consonanti dell\'alfabeto coreano.'
   },
   {
     id: '2',
-    title: 'Saluti Fondamentali',
+    title: 'Hangul-Vocali',
     korean: '인사와 소개',
-    link: '/lezioni/saluti.html',
+    link: '/lezioni/vocali.html',
     color: 'bg-[#1cb0f6]',
     borderColor: 'border-[#1899d6]',
-    iconName: 'MessageCircle',
-    description: 'Impara a presentarti, dire "Ciao", "Arrivederci" e "Grazie" nei diversi livelli di cortesia.'
+    iconName: 'BookOpen',
+    description: 'Impara l\'ordine dei tratti delle consonanti dell\'alfabeto coreano.'
   },
   {
     id: '3',
