@@ -96,7 +96,7 @@ export const PDF_ITEMS: PdfItem[] = [
     title: 'Eserciziario di Lettura Introduttiva',
     description: 'Un PDF completo di parole reali e frasi semplici da trascrivere e leggere ad alta voce con pronuncia figurata.',
     category: 'Eserciziario',
-    link: '/pdf/eserciziario.pdf',
+    link: '/pdf/Eserciziario.pdf',
     pages: 5,
     badge: 'Principiante'
   }
