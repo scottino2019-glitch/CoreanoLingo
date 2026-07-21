@@ -69,7 +69,7 @@ export const PDF_ITEMS: PdfItem[] = [
     title: 'Griglia di Scrittura Hangul',
     description: 'Foglio a quadretti con le linee guida per esercitarsi a mano libera nel disegno di consonanti e vocali base.',
     category: 'Scrittura',
-    link: '/pdf/scrittura_hangul.pdf',
+    link: '/pdf/foglio.pdf',
     pages: 2,
     badge: 'Principiante'
   },
@@ -78,7 +78,7 @@ export const PDF_ITEMS: PdfItem[] = [
     title: 'Dizionario dei Saluti Comuni',
     description: 'Scheda di consultazione tascabile con i saluti formali, standard ed informali più diffusi in Corea.',
     category: 'Vocabolario',
-    link: '/pdf/saluti_tascabili.pdf',
+    link: '/pdf/saluti.pdf',
     pages: 1,
     badge: 'Consigliato'
   },
@@ -96,7 +96,7 @@ export const PDF_ITEMS: PdfItem[] = [
     title: 'Eserciziario di Lettura Introduttiva',
     description: 'Un PDF completo di parole reali e frasi semplici da trascrivere e leggere ad alta voce con pronuncia figurata.',
     category: 'Eserciziario',
-    link: '/pdf/lettura_esercizi.pdf',
+    link: '/pdf/eserciziario.pdf',
     pages: 5,
     badge: 'Principiante'
   }
@@ -131,7 +131,7 @@ export const EXERCISE_ITEMS: ExerciseItem[] = [
     id: 'ex-4',
     title: 'Costruttore di Frasi (Drag & Drop)',
     description: 'Trascina i blocchi di parole nell\'ordine corretto per formare frasi di senso compiuto in coreano.',
-    link: '/esercizi/frasi.html',
+    link: 'https://costruttore-di-frasi-coreane.vercel.app/',
     difficulty: 'Sfida',
     iconName: 'GitCommit'
   }
