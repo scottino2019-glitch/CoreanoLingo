@@ -123,7 +123,7 @@ export const EXERCISE_ITEMS: ExerciseItem[] = [
     id: 'ex-3',
     title: 'Ascolto e Pronuncia',
     description: 'Un modulo per ascoltare file audio e selezionare la sillaba coreana corrispondente al suono pronunciato.',
-    link: '/esercizi/ascolto.html',
+    link: 'https://coreano-ascolto-pronuncia.netlify.app/',
     difficulty: 'Sfida',
     iconName: 'Volume2'
   },
